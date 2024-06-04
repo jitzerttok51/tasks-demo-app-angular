@@ -41,5 +41,5 @@ jobs:
                 git add *
                 git config --global user.name 'GitHub deploy Bot'
                 git config --global user.email '<>'
-                git commit -am "Deploy project"
+                git commit --allow-empty -am "Deploy project"
                 git push
