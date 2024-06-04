@@ -28,6 +28,7 @@ jobs:
             - name: Build angular app
               run: |
                 cd main 
+                npm install
                 npx ng build -c production --base-href https://jitzerttok51.github.io/tasks-demo-app-angular/
                 cd -
             
