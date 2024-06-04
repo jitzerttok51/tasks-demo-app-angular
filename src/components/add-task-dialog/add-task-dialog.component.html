@@ -1,0 +1,23 @@
+<dialog #dialog>
+    <article>
+        <h2>Add Task</h2>
+        <form [formGroup]="form">
+            <div>
+                <label for="title">Title</label>
+                <input id="title" name="title" type="text" formControlName="title"/>
+            </div>
+            <div>
+                <label for="summary">Summary</label>
+                <textarea name="summary" id="summary" formControlName="summary"></textarea>
+            </div>
+            <div>
+                <label for="dueDate">Due Date</label>
+                <input id="dueDate" name="dueDate" type="date" formControlName="dueDate"/>
+            </div>
+        </form>
+        <nav>
+            <button class="button-opt" (click)="closeDialog()">Cancel</button>
+            <button class="button-main" (click)="submitDialog()">Create</button>
+        </nav>
+    </article>
+</dialog>
