@@ -1,0 +1,44 @@
+name: Deploy web app to Azure Static Web Apps
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+    contents: write
+
+jobs:
+    build_and_deploy_job:
+        permissions:
+            contents: write
+        runs-on: ubuntu-latest
+        name: Build and Deploy Job
+        steps:
+            - uses: actions/checkout@v4
+              name: Checkout main
+              with:
+                path: main
+        
+            - uses: actions/checkout@v4
+              name: Checkout public
+              with:
+                path: public
+                ref: public
+            
+            - name: Build angular app
+              run: |
+                cd main 
+                npx ng build -c production --base-href https://jitzerttok51.github.io/tasks-demo-app-angular/
+                cd -
+            
+            - name: Copy to public branch
+              run: cp main/dist/angular-demo/browser/* public
+
+            - name: Push public branch
+              run: |
+                cd public
+                git add *
+                git config --global user.name 'GitHub deploy Bot'
+                git config --global user.email '<>'
+                git commit -am "Deploy project"
+                git push
